@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Purchase Behavior Predictor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+        background: #fff4e6;
+        font-family: 'Arial', sans-serif;
+        color: #5d4037;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+      }
+      
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+      
+      .form-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      }
+      
+      h1 {
+        text-align: center;
+        color: #ff7043;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        animation: fadeIn 1s ease-in;
+      }
+      
+      h4 {
+        font-size: 1rem;
+        color: #5d4037;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #5d4037;
+        font-weight: bold;
+      }
+      
+      input[type="number"],
+      input[type="radio"] {
+        margin-top: 5px;
+      }
+      
+      input[type="number"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease-in-out;
+      }
+      
+      input[type="number"]:focus {
+        border-color: #ff7043;
+        outline: none;
+      }
+      
+      .radio-group {
+        margin-bottom: 20px;
+      }
+      
+      .radio-group label {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 1rem;
+      }
+      
+      .button {
+        width: 100%;
+        padding: 15px;
+        color: #fff;
+        background-color: #ff7043;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+      }
+      
+      .button:hover {
+        background-color: #ff5722;
+        transform: scale(1.05);
+      }
+      
+      .button:active {
+        background-color: #e64a19;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+      }
+      
+      .slides {
+        display: flex;
+        transition: transform 1.5s ease-in-out;
+        height: 100%;
+      }
+      
+      .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+      }
+      
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      } 
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+                
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Customer Purchase Behavior Predictor</h1>
+      <h4>This app predicts whether the customer will purchase the product or not. Try filling in the details below.</h4>
+      <form id="predictForm" action="" method="post">
+        <label for="age">Enter Customer Age</label>
+        <input type="number" name="age" id="age" placeholder="Enter age of the customer" required />
+
+        <label>Select Gender</label>
+        <div class="radio-group">
+          <input type="radio" name="sex" id="male" value="0" checked /> <label for="male">Male</label>
+          <input type="radio" name="sex" id="female" value="1" /> <label for="female">Female</label>
+        </div>
+
+        <label for="ai">Enter Annual Income</label>
+        <input type="number" name="ai" id="ai" placeholder="Enter Annual Income" required />
+
+        <label for="purchases">Enter Total Number of Purchases Made by the Customer</label>
+        <input type="number" name="purchases" id="purchases" placeholder="Enter Total number of purchases made by the customer" required />
+
+        <label>Select Product Category</label>
+        <div class="radio-group">
+          <input type="radio" name="pc" id="electronics" value="0" checked /> <label for="electronics">Electronics</label>
+          <input type="radio" name="pc" id="clothing" value="1" /> <label for="clothing">Clothing</label>
+          <input type="radio" name="pc" id="home-goods" value="2" /> <label for="home-goods">Home Goods</label>
+          <input type="radio" name="pc" id="beauty" value="3" /> <label for="beauty">Beauty</label>
+          <input type="radio" name="pc" id="sports" value="4" /> <label for="sports">Sports</label>
+        </div>
+
+        <label for="tsow">Time Spent on Website (minutes)</label>
+        <input type="number" step="any" name="tsow" id="tsow" placeholder="Enter time spent on the website" required />
+
+        <label>Customer Is a Member of the Loyalty Program</label>
+        <div class="radio-group">
+          <input type="radio" name="lpm" id="no" value="0" checked /> <label for="no">No</label>
+          <input type="radio" name="lpm" id="yes" value="1" /> <label for="yes">Yes</label>
+        </div>
+
+        <label for="da">Discounts Availed</label>
+        <input type="number" name="da" id="da" placeholder="Number of discounts availed by the customer (range: 0-5)" required />
+        <br><br>
+        <input type="submit" class="button" value="Predict" />
+      </form>
+      <h2 id="resultMessage"> {{ msg }} </h2>
+    </div>
+    <div class="slider">
+      <div class="slides">
+        <div class="slide"><img src="{{ url_for('static', filename='images/img1.jpg') }}" alt="Slide 1"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img2.jpg') }}" alt="Slide 2"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img3.jpg') }}" alt="Slide 3"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img4.jpg') }}" alt="Slide 4"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img5.jpg') }}" alt="Slide 5"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img6.jpg') }}" alt="Slide 6"></div>
+        <div class="slide"><img src="{{ url_for('static', filename='images/img7.jpg') }}" alt="Slide 7"></div>
+      
+      </div>
+    </div>
+  </div>
+
+  <script>
+      const slides = document.querySelector('.slides');
+      const slideElements = document.querySelectorAll('.slide');
+      const totalSlides = slideElements.length;
+      let currentIndex = 0;
+      const intervalTime = 3000; // 3 seconds
+    
+      function showSlide(index) {
+        if (index >= totalSlides) currentIndex = 0;
+        else if (index < 0) currentIndex = totalSlides - 1;
+        else currentIndex = index;
+    
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+    
+      function startSlider() {
+        setInterval(() => {
+          showSlide(currentIndex + 1);
+        }, intervalTime); // Change slide every 4 seconds
+      }
+    
+      startSlider();
+    </script> 
+</body>
+</html>
